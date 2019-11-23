@@ -2,11 +2,12 @@ const mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
     var schema =  new Schema({
-        salario: String,
-        salario_sin_descuento: String,
-        descuento_renta: String,
-        descuento_iss: String,
-        descuento_afp: String
+        username: String,
+        salario: Number,
+        salario_sin_descuento: Number,
+        descuento_renta: Number,
+        descuento_iss: Number,
+        descuento_afp: Number
     }, {collection: 'Salario'});
 
     module.exports = mongoose.model('Salario',schema);

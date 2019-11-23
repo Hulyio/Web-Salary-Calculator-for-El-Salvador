@@ -1,0 +1,21 @@
+h1 Guardar Salario
+form(action="" , method="post")
+    label id salario:
+    input(id="id_sal" type="text", name="id_salario", required)
+    br
+    label salario:
+    input(id="sal" type="text", name="salario", required)
+    br
+    label salario sin descuento:
+    input(id="sal_sin" type="text", name="salario_sin_descuento", required )
+    br
+    label descuento renta
+    input(id="desc_renta" type="text", name="descuento_renta", required )
+    br
+    label descuento iss
+    input(id="desc_iss", type="text", name="descuento_iss" required )
+    br
+    label descuento afp:
+    input(id="desc_afp" type="text", name="descuento_afp", required )
+    br
+    input(id="submit_btn" type="submit" value="Guardar Salario" formaction="/salario")

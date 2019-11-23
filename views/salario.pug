@@ -1,0 +1,59 @@
+extends ../default
+
+block content
+  
+  include ../templates/nav
+
+  div(class=['ui', 'container', 'grid', 'stackable'])
+    div(class=['sixteen', 'wide', 'column'])
+
+      h2(class=['ui', 'header', 'blue', 'dividing'])= 'Lista de productos'
+
+      table(class=['ui', 'table', 'celled'] id='tbl-productosfirebase')
+        thead
+          tr
+            th ID Salario
+            th Salario
+            th Salario Sin Descuento
+            th Descuente de Renta
+            th Descuento ISS
+            th Descuento AFP
+        tbody(id='tbody-tabla-productos')
+
+
+  script(src='/javascripts/productosfirebase.js')
+
+        each producto in productos
+                article(class="style1")
+                    span(class="image")
+                        img(src="images/pic01.jpg", alt="")
+                    a
+                        h2= producto.nombre
+                        div(class="content")
+                            p= `Precio: ${producto.precio}`
+                            p= producto.descripcion
+                            form(action="", method="post")
+                                input(class="hiddenInput", type="text", name="idProducto", value=`${producto._id}`)
+                                input(class="hiddenInput", type="text", name="nombreProducto", value=`${producto.nombre}`)
+                                input(class="hiddenInput", type="text", name="idUsuario", value=`${usuario._id}`)
+                                input(class="hiddenInput", type="text", name="nombreUsuario", value=`${usuario.nombre}`)
+                                input(type="button", value="Comprar")
+
+
+for(var key in datos){
+			filasAMostrar += "<tr>" +
+								"<td>" + datos[key].nombre_producto + "</td>" +
+								"<td>" + "$" + datos[key].precio_producto + "</td>" +
+								"<td>" + datos[key].stock_producto + "</td>" +
+								"<td>" + datos[key].fecha_producto + "</td>" +
+								"<td>" +
+									'<a class="ui button basic icon editar" data-producto="' + key + '">' +
+										'<i class="cut icon"></i>' +
+									'</a>' +
+								"</td>" +
+								'<td>' +
+									'<a class="ui button basic icon borrar" data-producto="' + key + '">' +
+										'<i class="trash icon"></i>' +
+									'</a>' +
+								'</td>'
+							 "</tr>"
