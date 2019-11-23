@@ -1,5 +1,5 @@
 var Salario = require('../models/Salario');
-var debug = require('debug')('Parcial_3_Web_Salario:salario_controller');
+var debug = require('debug')('Parcial_3_Web_Salario:graphic_controller');
 
 module.exports.getAll = (req,res,next) => {
     var salarios = [];
@@ -23,13 +23,10 @@ module.exports.getAll = (req,res,next) => {
 }
 
 module.exports.getOne = (req,res,next) => {
-    var salarios = [];
-    var elparams = req.params.username
-    //Salario.findOne({username: elparams}, function(err,obj) { console.log(obj); });
-    Salario.findOne({username : elparams})
+    Salario.findOne({username : req.params.username})
         .then((salario) => {
             console.log(salario);
-            res.render('newsalarioform', {title: 'Index', salarios: salario});
+            res.render('onesalarioform', {var2: salario});
         }).catch(err => {
             next(err);
         })
@@ -63,4 +60,64 @@ module.exports.register = (req, res, next) => {
         }).catch(err => {
             next(err);
         });
+}
+
+module.exports.update = (req, res, next) => {
+    debug("Update Salario", {
+        username: req.params.username,
+        salario: req.body.salario,
+        salario_sin_descuento: req.body.salario_sin_descuento || "",
+        descuento_renta: req.body.descuento_renta || "",
+        descuento_iss: req.body.descuento_iss,
+        descuento_afp: req.body.descuento_afp
+    });
+
+    var salarios = [];
+    var elparams = req.params.username
+    //Salario.findOne({username: elparams}, function(err,obj) { console.log(obj); });
+    Salario.findOne({username : elparams})
+        .then((salario) => {
+            console.log(salario);
+            res.render('newsalarioform', {title: 'Index', salarios: salario});
+        }).catch(err => {
+            next(err);
+        })
+
+    let update = {
+        username: req.body.username,
+        salario: req.body.salario || "",
+        salario_sin_descuento: req.body.salario_sin_descuento || "",
+        descuento_renta: req.body.descuento_renta,
+        descuento_iss: req.body.descuento_iss,
+        descuento_afp: req.body.descuento_afp
+    };
+
+    Salario.findOneAndUpdate({
+            username: req.params.username
+        }, update, {
+            new: true
+        })
+        .then((updated) => {
+            if (updated)
+                return res.status(200).json(updated);
+            else
+                return res.status(400).json(null);
+        }).catch(err => {
+            next(err);
+        });
+}
+
+module.exports.delete = (req, res, next) => {
+
+    debug("Delete Salario", {
+        username: req.params.username,
+    });
+
+    Salario.findOneAndDelete({username: req.params.username})
+    .then((data) =>{
+        if (data) res.redirect('/')
+        else console.log("erasing failed")
+    }).catch( err => {
+        next(err);
+    })
 }

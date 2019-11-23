@@ -1,34 +1,31 @@
 extends default
 
 block content
-  
+
   include nav
 
   div(class=['ui', 'container', 'grid', 'stackable'])
     div(class=['ten', 'wide', 'column'])
 
-      h2(class=['ui', 'header', 'blue', 'dividing'])= 'Crear producto'
+      h2(class=['ui', 'header', 'blue', 'dividing'])= 'Ver un solo Producto'
 
       div(class='form-nuevoproductofirebase')
-        form(class=['ui', 'form'] action='' method=)
-           .ui.field
-             label(for='username') Username
-             input(type='text', name='username', value=salario.username)
-           .ui.field
-             label(for='salario') Salario
-             input(type='text', name='salario', value=salario.salario)
-           .ui.field
-             label(for='salario_sin_descuento') Salario Sin Descuento
-             input(type='text', name='salario_sin_descuento', value=salario.salario_sin_descuento) 
-           .ui.field
-             label(for='descuento_renta') Descuento de Renta
-             input(type='text', name='descuento_renta', value=salario.descuento_renta) 
-           .ui.field
-             label(for='descuento_iss') Descuento ISS
-             input(type='text', name='descuento_iss', value=salario.descuento_iss)
-           .ui.field
-             label(for='descuento_afp') Descuento AFP
-             input(type='text', name='descuento_afp', value=salario.descuento_afp)
-           .ui.input
-             input#boton-enviar-producto-firebase(type='submit', name='', value='Editar Salario')
-            div(class=['ui', 'message', 'error'])
+        form(class=['ui', 'form'] action='' method='')
+          .ui.field
+            label(for='username') Username
+            input(type='text', name='username', value= var2.username readonly)
+          .ui.field
+            label(for='salario') Salario
+            input(type='text', name='salario', value= var2.salario readonly)
+          .ui.field
+            label(for='salario_sin_descuento') Salario Sin Descuento
+            input(type='text', name='salario_sin_descuento', value= var2.salario_sin_descuento readonly) 
+          .ui.field
+            label(for='descuento_renta') Descuento de Renta
+            input(type='text', name='descuento_renta', value= var2.descuento_renta readonly) 
+          .ui.field
+            label(for='descuento_iss') Descuento ISS
+            input(type='text', name='descuento_iss', value= var2.descuento_iss readonly)
+          .ui.field
+            label(for='descuento_afp') Descuento AFP
+            input(type='text', name='descuento_afp', value= var2.descuento_afp readonly)

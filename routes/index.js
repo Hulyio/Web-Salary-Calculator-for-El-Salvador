@@ -2,6 +2,17 @@ var express = require('express');
 var router = express.Router();
 var graphicController = require("../controllers/graphicController");
 
+/* UPDATE one page. */
+router.get('/update/:username', function(req, res, next) {
+  graphicController.update(req,res,next);
+});
+
+/* DELETE one page. */
+router.get('/delete/:username', function(req, res, next) {
+  graphicController.delete(req,res,next);
+});
+
+
 /* GET form page. */
 router.get('/salarioform', function(req, res, next) {
   res.render('newsalarioform', { title: 'Express' });
@@ -16,8 +27,6 @@ router.get('/', function(req, res, next) {
 router.get('/:username', function(req, res, next) {
   graphicController.getOne(req,res,next);
 });
-
-//post one 
 
 router.post("/", graphicController.register);
 
