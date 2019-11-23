@@ -33,7 +33,7 @@ block content
             td=salario.descuento_iss
             td=salario.descuento_afp
             td
-              a(class="ui button basic icon editar")
+              a(class="ui button basic icon editar" href=`/index/update/${salario.username}`)
                 i(class="cut icon")
             td
               a(class="ui button basic icon borrar" href=`/index/delete/${salario.username}`)

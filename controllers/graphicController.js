@@ -72,18 +72,21 @@ module.exports.update = (req, res, next) => {
         descuento_afp: req.body.descuento_afp
     });
 
-    var salarios = [];
     var elparams = req.params.username
     //Salario.findOne({username: elparams}, function(err,obj) { console.log(obj); });
     Salario.findOne({username : elparams})
         .then((salario) => {
             console.log(salario);
-            res.render('newsalarioform', {title: 'Index', salarios: salario});
+            res.render('newsalarioform', {title: 'Index', mivariable: salario});
         }).catch(err => {
             next(err);
         })
+}
 
+module.exports.update2 = (req,res, next) => {
+    
     let update = {
+        _id: req.params._id,
         username: req.body.username,
         salario: req.body.salario || "",
         salario_sin_descuento: req.body.salario_sin_descuento || "",
@@ -93,13 +96,13 @@ module.exports.update = (req, res, next) => {
     };
 
     Salario.findOneAndUpdate({
-            username: req.params.username
+            _id: update._id
         }, update, {
             new: true
         })
         .then((updated) => {
             if (updated)
-                return res.status(200).json(updated);
+                res.redirect('/index')
             else
                 return res.status(400).json(null);
         }).catch(err => {
