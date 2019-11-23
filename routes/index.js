@@ -1,19 +1,24 @@
 var express = require('express');
 var router = express.Router();
+var graphicController = require("../controllers/graphicController");
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+/* GET form page. */
+router.get('/salarioform', function(req, res, next) {
+  res.render('newsalarioform', { title: 'Express' });
 });
 
+/* GET all page. */
+router.get('/', function(req, res, next) {
+  graphicController.getAll(req,res,next);
+});
+
+/* GET one page. */
+router.get('/:username', function(req, res, next) {
+  graphicController.getOne(req,res,next);
+});
+
+//post one 
+
+router.post("/", graphicController.register);
+
 module.exports = router;
-
-/*var salarioController = require("../controllers/salarioController");
-
-router.get("/:username", salarioController.getOne);
-router.get("/", salarioController.getAll);
-router.post("/", salarioController.register);
-router.put("/:username", salarioController.update);
-router.delete("/:username", salarioController.delete);
-
-module.exports = router;*/

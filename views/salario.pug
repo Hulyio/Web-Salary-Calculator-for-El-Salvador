@@ -1,8 +1,8 @@
-extends ../default
+extends default
 
 block content
   
-  include ../templates/nav
+  include nav
 
   div(class=['ui', 'container', 'grid', 'stackable'])
     div(class=['sixteen', 'wide', 'column'])
@@ -13,47 +13,28 @@ block content
         thead
           tr
             th ID Salario
+            th Username
             th Salario
             th Salario Sin Descuento
-            th Descuente de Renta
+            th Descuento de Renta
             th Descuento ISS
             th Descuento AFP
+            th Editar
+            th Borrar
+            
         tbody(id='tbody-tabla-productos')
-
-
-  script(src='/javascripts/productosfirebase.js')
-
-        each producto in productos
-                article(class="style1")
-                    span(class="image")
-                        img(src="images/pic01.jpg", alt="")
-                    a
-                        h2= producto.nombre
-                        div(class="content")
-                            p= `Precio: ${producto.precio}`
-                            p= producto.descripcion
-                            form(action="", method="post")
-                                input(class="hiddenInput", type="text", name="idProducto", value=`${producto._id}`)
-                                input(class="hiddenInput", type="text", name="nombreProducto", value=`${producto.nombre}`)
-                                input(class="hiddenInput", type="text", name="idUsuario", value=`${usuario._id}`)
-                                input(class="hiddenInput", type="text", name="nombreUsuario", value=`${usuario.nombre}`)
-                                input(type="button", value="Comprar")
-
-
-for(var key in datos){
-			filasAMostrar += "<tr>" +
-								"<td>" + datos[key].nombre_producto + "</td>" +
-								"<td>" + "$" + datos[key].precio_producto + "</td>" +
-								"<td>" + datos[key].stock_producto + "</td>" +
-								"<td>" + datos[key].fecha_producto + "</td>" +
-								"<td>" +
-									'<a class="ui button basic icon editar" data-producto="' + key + '">' +
-										'<i class="cut icon"></i>' +
-									'</a>' +
-								"</td>" +
-								'<td>' +
-									'<a class="ui button basic icon borrar" data-producto="' + key + '">' +
-										'<i class="trash icon"></i>' +
-									'</a>' +
-								'</td>'
-							 "</tr>"
+        each salario in salarios
+          tr
+            td=salario._id
+            td=salario.username
+            td=salario.salario
+            td=salario.salario_sin_descuento
+            td=salario.descuento_renta
+            td=salario.descuento_iss
+            td=salario.descuento_afp
+            td
+              a(class="ui button basic icon editar" href=`/salario/${username}`)
+                i(class="cut icon")
+            td
+              a(class="ui button basic icon borrar")
+                i(class="trash icon")
